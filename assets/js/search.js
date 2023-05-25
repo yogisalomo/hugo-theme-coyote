@@ -4,7 +4,7 @@ const fuseOptions = {
   includeMatches: true,
   threshold: 0.0,
   tokenize:true,
-  location: 0,
+  ignoreLocation: true,
   distance: 100,
   maxPatternLength: 32,
   minMatchCharLength: 1,
@@ -46,5 +46,12 @@ input.addEventListener('keyup', (e) => {
     results.innerHTML = itemList
   } else {
     results.innerHTML = ''
+  }
+})
+
+// Prevent search clears
+input.addEventListener('keydown', (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault()
   }
 })
