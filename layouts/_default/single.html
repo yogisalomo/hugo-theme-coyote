@@ -1,9 +1,9 @@
 {{ define "main" }}
 <div class="post">
-  <div class="post__header">
+  <!-- <div class="post__header">
     {{ $image := .Resources.GetMatch .Params.image }}
-    <img class="post__image" src="{{ $image.RelPermalink }}">
-  </div>
+    <img class="post__image" src="">
+  </div> -->
 
   {{ with .Params.tags }}
   <div class="post__tags">
@@ -14,10 +14,26 @@
   {{ end }}
 
   <section class="post__content">
-    <h1 id="title">{{ .Title }}</h1>
+    <a href="{{ .Params.homepageUrl}}"><h1 id="title">{{ .Title }}</h1></a>
     <div>
       <article>
-          {{ .Content }}
+        <h3>Field</h3>  
+        <p>{{ .Params.field }}</p>
+        <h3>English Usage</h3>  
+        {{ if eq .Params.english "main"}}
+          <p>English as main language</p>
+        {{ else }}
+          <p>Accepts non-Korean speaker</p>
+        {{ end }}
+        <h3>URLs</h3>
+        <ul>
+          {{ if isset .Params "linkedinurl" }}
+            <li><a href="{{ .Params.linkedinUrl }}">LinkedIn</a></li>
+          {{ end }}
+          {{ if isset .Params "careerurl" }}
+            <li><a href="{{ .Params.careerUrl }}">Career Page</a></li>
+          {{ end }}
+        </ul>
       </article>
     </div>
   </section>
